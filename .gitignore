@@ -9,7 +9,7 @@
 # testing
 
 #environment variables
-.env 
+*.env 
 
 /coverage
 
