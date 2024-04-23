@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 export const commentSchema = new mongoose.Schema(
   {
     content: String,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,
@@ -12,13 +16,11 @@ export const commentSchema = new mongoose.Schema(
 const postSchema = new mongoose.Schema(
   {
     title: String,
-    author: String,
     content: String,
     slug: {
       type: String,
-      unique: true,
+      unique: [true, "Post with given slug already exists"],
     },
-    comments: [commentSchema],
   },
   {
     timestamps: true,

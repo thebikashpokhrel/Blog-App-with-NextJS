@@ -74,3 +74,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+.ql-toolbar {
+  @apply rounded-t-md border border-input !important;
+}
+.ql-container.ql-snow {
+  @apply rounded-b-md border border-input !important;
+}
+
+.ql-editor {
+  @apply h-[200px] !important;
+}

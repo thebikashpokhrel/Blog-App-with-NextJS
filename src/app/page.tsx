@@ -1,4 +1,4 @@
-import { fetchPosts } from "./actions/server";
+import { fetchPosts } from "@/actions/post.actions";
 import "./globals.css";
 
 export default async function Home() {
