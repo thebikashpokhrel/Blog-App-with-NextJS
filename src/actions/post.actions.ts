@@ -9,9 +9,17 @@ export async function fetchPosts() {
   try {
     await dbConnect();
     const posts = await Post.find();
-    return posts;
+    return {
+      success: true,
+      message: "Posts fetched successfully",
+      data: { posts },
+    };
   } catch (error) {
-    console.log("Error fetching posts", error);
+    return {
+      success: false,
+      message: "Error occurred fetching posts",
+      error,
+    };
   }
 }
 
@@ -27,6 +35,7 @@ export async function createPostAction(post: postType) {
       return {
         success: false,
         message: "Post with given slug already exists",
+        data: { existingPost },
       };
     }
 
@@ -49,10 +58,10 @@ export async function createPostAction(post: postType) {
       data: { createdPost },
     };
   } catch (error: any) {
-    console.log(error.message);
     return {
       success: false,
       message: "Error occurred while creating a new post",
+      error,
     };
   }
 }

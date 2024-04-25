@@ -3,7 +3,8 @@ import { fetchPosts } from "@/actions/post.actions";
 import { postType } from "@/schemas/post.schema";
 
 export default async function adminPage() {
-  const posts = await fetchPosts();
+  const response = await fetchPosts();
+  const posts = response.data?.posts;
   return (
     <div>
       {posts?.map((post: postType) => (
