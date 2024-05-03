@@ -5,20 +5,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 import React from "react";
+import slugify from "slug";
 import { createPostAction } from "../../../actions/post.actions";
 import toast, { Toaster } from "react-hot-toast";
-import { postSchema } from "@/schemas/post.schema";
+import { createPostSchema, createPostType } from "@/schemas/post.schema";
 
 export default function createPost() {
-  const [post, setPost] = React.useState({
-    title: "",
-    slug: "",
-    content: "",
-  });
+  const [post, setPost] = React.useState<createPostType>({} as createPostType);
 
   const handleCreatePost = async function (formData: FormData) {
     const post = Object.fromEntries(formData);
-    const validatedPost = postSchema.safeParse(post);
+    const validatedPost = createPostSchema.safeParse(post);
 
     if (!validatedPost.success) {
       const errors = validatedPost.error.issues;
@@ -41,7 +38,7 @@ export default function createPost() {
   };
 
   React.useEffect(() => {
-    const slug = post.title.toLowerCase().replaceAll(" ", "-");
+    const slug = slugify(post.title || "");
     setPost((prev) => ({ ...prev, slug }));
   }, [post.title]);
 
@@ -81,7 +78,7 @@ export default function createPost() {
           onChange={(e) =>
             setPost((prev) => ({
               ...prev,
-              slug: e.target.value.toLowerCase().replaceAll(" ", "-"),
+              slug: slugify(e.target.value),
             }))
           }
         />

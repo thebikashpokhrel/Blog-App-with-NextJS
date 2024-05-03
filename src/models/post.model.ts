@@ -13,7 +13,7 @@ export const commentSchema = new mongoose.Schema(
   }
 );
 
-const postSchema = new mongoose.Schema(
+const PostSchema = new mongoose.Schema(
   {
     title: String,
     content: String,
@@ -27,4 +27,4 @@ const postSchema = new mongoose.Schema(
   }
 );
 
-export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
+export const Post = mongoose.models.Post || mongoose.model("Post", PostSchema);
